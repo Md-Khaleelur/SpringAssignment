@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Reference Bootstrap files -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Book Entry</title>
+</head>
+
+<body>
+<div class="container">
+
+    <br>
+    <h2>Book Entry</h2>
+    <br>
+    <form action="#" th:action="@{/library/processForm}"  th:object="${library}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+
+                    <!-- Check for  error -->
+                    <div th:if="${addLibraryError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                        <span th:text="${addLibraryError}"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <input type="text" th:field="*{bookName}" placeholder="Book Name" class="form-control mb-4 col-4" required>
+
+        <div th:if="${#fields.hasErrors('bookName')}"
+             style="margin-bottom: 25px" class="text-danger">
+            <ul>
+                <li th:each="err : ${#fields.errors('bookName')}" th:text="'bookName ' + ${err}" />
+            </ul>
+        </div>
+
+        <input type="text" th:field="*{author}" placeholder="author" class="form-control mb-4 col-4" required>
+
+        <div th:if="${#fields.hasErrors('author')}"
+             style="margin-bottom: 25px" class="text-danger">
+            <ul>
+                <li th:each="err : ${#fields.errors('author')}" th:text="'author ' + ${err}" />
+            </ul>
+        </div>
+
+        <input type="text" th:field="*{category}" placeholder="category" class="form-control mb-4 col-4" required>
+
+        <div th:if="${#fields.hasErrors('category')}"
+             style="margin-bottom: 25px" class="text-danger">
+            <ul>
+                <li th:each="err : ${#fields.errors('category')}" th:text="'category ' + ${err}" />
+            </ul>
+        </div>
+
+        <input type="text" th:field="*{publisher}" placeholder="publisher" class="form-control mb-4 col-4" required>
+
+        <div th:if="${#fields.hasErrors('publisher')}"
+             style="margin-bottom: 25px" class="text-danger">
+            <ul>
+                <li th:each="err : ${#fields.errors('publisher')}" th:text="'publisher ' + ${err}" />
+            </ul>
+        </div>
+
+        <input type="text" th:field="*{status}" placeholder="status" class="form-control mb-4 col-4" required>
+
+        <div th:if="${#fields.hasErrors('status')}"
+             style="margin-bottom: 25px" class="text-danger">
+            <ul>
+                <li th:each="err : ${#fields.errors('status')}" th:text="'status ' + ${err}" />
+            </ul>
+        </div>
+
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-dark col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/library/list}" class="btn btn-danger btn-sm"> Back </a>
+
+</div>
+</body>
+
+</html>
+

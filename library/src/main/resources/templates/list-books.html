@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script type="text/javascript" language="javascript" src="TableFilter/tablefilter.js">var tf = setFilterGrid("table");</script>
+
+    <title>List of Books</title>
+</head>
+
+<body bgcolor="#B2BABB">
+
+<div class="container">
+    <h3>Library Repository</h3>
+    <hr>
+
+    <a th:href="@{/library/showFormForAddBook}" class="btn btn-dark btn-sm mb-3 col-2" >Add Book</a>
+
+
+    <form th:action="@{/logout}" method="POST" class="logout" >
+        <input type="submit" value="Logout"   class="btn btn-danger btn-sm mb-3" style="float:right;"/>
+    </form>
+
+    <form th:action="@{/library/name}" method="get" style="display:inline;">
+
+        <select class="btn btn-light btn-sm mb-3 btnc" id="courierTasks" name="status">
+            <option value="" disabled selected>Choose status</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+            <option th:each="theStatus : ${status}"
+                    th:value="${theStatus}"
+                    th:text="${theStatus}">
+            </option>
+        </select>
+
+        <input type="hidden"/>
+        <button class="btn btn-secondary btn-sm mb-3 btnc" type="submit">Filter</button>
+
+    </form>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>BookName</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Publisher</th>
+                <th>Status</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempBook : ${library}" >
+                <td th:text="${tempBook.bookName}"></td>
+                <td th:text="${tempBook.author}"></td>
+                <td th:text="${tempBook.category}"></td>
+                <td th:text="${tempBook.publisher}"></td>
+                <td th:text="${tempBook.status}"></td>
+
+                <td>
+                    <a th:href="@{/library/showFormForUpdate(bookId=${tempBook.id})}"
+                        class="btn btn-dark btn-sm btnm">
+                    Update
+                    </a>
+                </td>
+
+                <td>
+                    <a th:href="@{/library/delete(bookId=${tempBook.id})}"
+                       class="btn btn-danger btn-sm btnm"
+                       onclick="if(!(confirm('Are you sure you want to delete?'))) return false">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    <a th:href="@{/library/list}" class="btn btn-dark btn-sm mb-3 col-2" >All Books</a>
+
+</div>
+</body>
+
+</html>
