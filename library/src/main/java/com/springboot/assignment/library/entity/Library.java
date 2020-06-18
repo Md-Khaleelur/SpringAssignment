@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Library {
 
     @Id
@@ -45,20 +47,4 @@ public class Library {
     @Column(name = "status")
     private String status;
 
-
-    public Library(int id, @NotNull() @Size(min = 3, message = "* required") String bookName, @NotNull() @Size(min = 1, message = "* required") String author, @NotNull() @Size(min = 3, message = "* required") String category, @NotNull() @Size(min = 5, message = "* required") String publisher, @NotNull() @Size(min = 5, message = "* required") String status) {
-        this.id = id;
-        this.bookName = bookName;
-        this.author = author;
-        this.category = category;
-        this.publisher = publisher;
-        this.status = status;
-    }
-
-    public Library() {
-    }
-
-    public int getId() {
-        return this.id;
-    }
 }

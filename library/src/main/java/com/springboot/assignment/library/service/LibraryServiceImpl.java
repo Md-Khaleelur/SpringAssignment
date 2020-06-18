@@ -13,7 +13,7 @@ import java.util.Optional;
 @Transactional
 public class LibraryServiceImpl implements LibraryService {
 
-    private LibraryRepository libraryRepository;
+    final LibraryRepository libraryRepository;
 
     @Autowired
     public LibraryServiceImpl(LibraryRepository libraryRepository){
@@ -26,13 +26,13 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public Library findById(int id) {
+    public Optional<Library> findById(int id) {
         Optional<Library> result = libraryRepository.findById(id);
-        Library library = null;
-        if (result.isPresent()) {
-            library = result.get();
-        }
-        return library;
+        //Library library = null;
+//        if (result.isPresent()) {
+//            library = result.get();
+//        }
+        return result;
     }
 
     @Override
